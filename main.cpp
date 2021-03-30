@@ -9,7 +9,6 @@ using namespace std;
 namespace GenshinImpact {
 	class Qin
 	{
-		constexpr static const int pai = 555;
 		enum class MusicNoteH :unsigned
 		{
 			Do = 'Q',
@@ -49,7 +48,7 @@ namespace GenshinImpact {
 			string xxx = "QQTTYYT RREEWWQ TTRREEW TTRREEW QQTTYYT RREEWWQ";
 			for(auto e : xxx)
 			{
-				play_main(e, 200);
+				play_main(e, 555);
 			}
 		}
 
@@ -64,6 +63,7 @@ namespace GenshinImpact {
 				return;
 			}
 
+			unsigned space = 555;
 			string line;
 			while(getline(ifs, line))
 			{
@@ -73,19 +73,29 @@ namespace GenshinImpact {
 					continue;
 				}
 
+				if("t:" == line.substr(0, 2))
+				{
+					stringstream ss;
+					ss << line.substr(2);
+					ss >> space;
+					cout << "Ã¿Òô·û¼ä¸ô:" << space << endl;
+					continue;
+				}
+
 				if("from" == line.substr(0, 4))
 				{
 					cout << "from:" << line.substr(5) << endl;
 					continue;
 				}
 
+
 				for(auto e : line)
 				{
 					if((e >= 'a' && e <= 'z') || (e >= 'A' && e <= 'Z'))
-						play_main(static_cast<unsigned>(IsCharUpperA(e) ? e : (e - 'a' + 'A')), pai);
+						play_main(static_cast<unsigned>(IsCharUpperA(e) ? e : (e - 'a' + 'A')), space);
 				}
 
-				play_wait(pai);
+				play_wait(space);
 				cout << endl;
 			}
 
@@ -127,15 +137,15 @@ namespace GenshinImpact {
 
 		bool play(const MusicNoteH &h)
 		{
-			return play_main(static_cast<unsigned>(h), pai);
+			return play_main(static_cast<unsigned>(h), 555);
 		}
 		bool play(const MusicNoteM &m)
 		{
-			return play_main(static_cast<unsigned>(m), pai);
+			return play_main(static_cast<unsigned>(m), 555);
 		}
 		bool play(const MusicNoteL &l)
 		{
-			return play_main(static_cast<unsigned>(l), pai);
+			return play_main(static_cast<unsigned>(l), 555);
 		}
 
 		bool play_main(unsigned note, unsigned delay)
